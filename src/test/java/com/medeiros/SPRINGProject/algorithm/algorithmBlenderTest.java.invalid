@@ -1,0 +1,119 @@
+//This single test file is marked invalid as it contains compilation errors.
+package com.medeiros.SPRINGProject.algorithm;
+import com.medeiros.SPRINGProject.Models.MusicModel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions.assertThrows;
+import org.mockito.Mockito;
+import org.junit.jupiter.api;
+import com.medeiros.SPRINGProject.utils.hashMapFunctions;
+
+public class algorithmBlenderTest {
+
+  // Merged class fields
+  private algorithmData AD;
+  private algorithmBlender algorithmBlender;
+
+  // Merged test methods
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@BeforeEach
+public void setUp() {
+    MockitoAnnotations.openMocks(this);
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsForSingleMusicModel() {
+    MusicModel musicModel = mock(MusicModel.class);
+    when(musicModel.getNumberOfLikes()).thenReturn(10);
+    when(musicModel.getNumberOfComents()).thenReturn(5);
+    when(musicModel.getMusicName()).thenReturn("Song A");
+    when(AD.rithmPointsByLike(10)).thenReturn(20);
+    when(AD.rithmPointsByComents(5)).thenReturn(10);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Collections.singletonList(musicModel));
+    assertEquals(1, result.size());
+    assertEquals(30, (int) result.get("Song A"));
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsForMultipleMusicModels() {
+    MusicModel musicModel1 = mock(MusicModel.class);
+    MusicModel musicModel2 = mock(MusicModel.class);
+    when(musicModel1.getNumberOfLikes()).thenReturn(10);
+    when(musicModel1.getNumberOfComents()).thenReturn(5);
+    when(musicModel1.getMusicName()).thenReturn("Song A");
+    when(AD.rithmPointsByLike(10)).thenReturn(20);
+    when(AD.rithmPointsByComents(5)).thenReturn(10);
+    when(musicModel2.getNumberOfLikes()).thenReturn(20);
+    when(musicModel2.getNumberOfComents()).thenReturn(10);
+    when(musicModel2.getMusicName()).thenReturn("Song B");
+    when(AD.rithmPointsByLike(20)).thenReturn(40);
+    when(AD.rithmPointsByComents(10)).thenReturn(20);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Arrays.asList(musicModel1, musicModel2));
+    assertEquals(2, result.size());
+    assertEquals(30, (int) result.get("Song A"));
+    assertEquals(60, (int) result.get("Song B"));
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("boundary")
+public void handleEmptyMusicModelList() {
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Collections.emptyList());
+    assertEquals(0, result.size());
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("invalid")
+public void handleNullMusicModelList() {
+    assertThrows(NullPointerException.class, () -> {
+        algorithmBlender.algorithmCalc(null);
+    });
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("boundary")
+public void calculatePointsWithZeroLikesAndComments() {
+    MusicModel musicModel = mock(MusicModel.class);
+    when(musicModel.getNumberOfLikes()).thenReturn(0);
+    when(musicModel.getNumberOfComents()).thenReturn(0);
+    when(musicModel.getMusicName()).thenReturn("Song C");
+    when(AD.rithmPointsByLike(0)).thenReturn(0);
+    when(AD.rithmPointsByComents(0)).thenReturn(0);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Collections.singletonList(musicModel));
+    assertEquals(1, result.size());
+    assertEquals(0, (int) result.get("Song C"));
+}
+}
