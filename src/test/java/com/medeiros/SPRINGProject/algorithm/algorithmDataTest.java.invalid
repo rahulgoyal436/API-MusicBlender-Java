@@ -1,0 +1,348 @@
+//This single test file is marked invalid as it contains compilation errors.
+package com.medeiros.SPRINGProject.algorithm;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class algorithmDataTest {
+
+  // Merged class fields
+  private algorithmData algorithmDataInstance;
+  int calculatedRithmPoints = algorithmDataInstance.rithmPointsByLike(likes);
+  boolean result = data.isBlack_list();
+  algorithmData data = new algorithmData();
+  boolean isBlocked = data.isBlocked();
+  int expected = 50;
+  int expectedPoints = 150;
+
+  // Merged test methods
+ 
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@BeforeEach
+public void setUp() {
+    algorithmDataInstance = new algorithmData();
+}
+
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@Test
+@Tag("valid")
+public void retrieveDefaultRithmPoints() {
+    int result = algorithmDataInstance.getRithmPoints();
+    assertEquals(0, result);
+}
+
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@Test
+@Tag("valid")
+public void retrieveSetRithmPoints() {
+    
+    int expectedRithmPoints = 50;
+    algorithmDataInstance.setRithmPoints(expectedRithmPoints);
+    int result = algorithmDataInstance.getRithmPoints();
+    assertEquals(expectedRithmPoints, result);
+}
+
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@Test
+@Tag("valid")
+public void retrieveRithmPointsWhenBlacklisted() {
+    
+    int expectedRithmPoints = 75;
+    algorithmDataInstance.setRithmPoints(expectedRithmPoints);
+    algorithmDataInstance.setBlack_list(true);
+    int result = algorithmDataInstance.getRithmPoints();
+    assertEquals(expectedRithmPoints, result);
+}
+
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@Test
+@Tag("valid")
+public void retrieveRithmPointsWhenBlocked() {
+    
+    int expectedRithmPoints = 100;
+    algorithmDataInstance.setRithmPoints(expectedRithmPoints);
+    algorithmDataInstance.setBlocked(true);
+    int result = algorithmDataInstance.getRithmPoints();
+    assertEquals(expectedRithmPoints, result);
+}
+
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@Test
+@Tag("integration")
+public void retrieveRithmPointsAfterCalculatingByLikes() {
+    
+    int likes = 5;
+    int calculatedRithmPoints = algorithmDataInstance.rithmPointsByLike(likes);
+    algorithmDataInstance.setRithmPoints(calculatedRithmPoints);
+    int result = algorithmDataInstance.getRithmPoints();
+    assertEquals(calculatedRithmPoints, result);
+}
+
+/*ROOST_METHOD_HASH=getRithmPoints_82f961bd0d
+ROOST_METHOD_SIG_HASH=getRithmPoints_728e09b79f
+
+*/
+@Test
+@Tag("integration")
+public void retrieveRithmPointsAfterCalculatingByComments() {
+    
+    int comments = 3;
+    int calculatedRithmPoints = algorithmDataInstance.rithmPointsByComents(comments);
+    algorithmDataInstance.setRithmPoints(calculatedRithmPoints);
+    int result = algorithmDataInstance.getRithmPoints();
+    assertEquals(calculatedRithmPoints, result);
+}
+
+/*ROOST_METHOD_HASH=isBlack_list_560ae9db06
+ROOST_METHOD_SIG_HASH=isBlack_list_4614434c3f
+
+*/
+@Test
+@Tag("valid")
+public void verifyDefaultBlackListValue() {
+    algorithmData data = new algorithmData();
+    boolean result = data.isBlack_list();
+    assertEquals(false, result);
+}
+
+/*ROOST_METHOD_HASH=isBlack_list_560ae9db06
+ROOST_METHOD_SIG_HASH=isBlack_list_4614434c3f
+
+*/
+@Test
+@Tag("valid")
+public void verifyBlackListValueAfterSettingTrue() {
+    algorithmData data = new algorithmData();
+    data.setBlack_list(true);
+    boolean result = data.isBlack_list();
+    assertEquals(true, result);
+}
+
+/*ROOST_METHOD_HASH=isBlack_list_560ae9db06
+ROOST_METHOD_SIG_HASH=isBlack_list_4614434c3f
+
+*/
+@Test
+@Tag("valid")
+public void verifyBlackListValueAfterSettingFalse() {
+    algorithmData data = new algorithmData();
+    data.setBlack_list(false);
+    boolean result = data.isBlack_list();
+    assertEquals(false, result);
+}
+
+/*ROOST_METHOD_HASH=isBlack_list_560ae9db06
+ROOST_METHOD_SIG_HASH=isBlack_list_4614434c3f
+
+*/
+@Test
+@Tag("valid")
+public void verifyBlackListUnchangedWhenOtherFieldsModified() {
+    algorithmData data = new algorithmData();
+    data.setBlack_list(true);
+    
+    data.setRithmPoints(100);
+    
+    data.setBlocked(true);
+    boolean result = data.isBlack_list();
+    assertEquals(true, result);
+}
+
+/*ROOST_METHOD_HASH=isBlack_list_560ae9db06
+ROOST_METHOD_SIG_HASH=isBlack_list_4614434c3f
+
+*/
+@Test
+@Tag("valid")
+public void verifyBlackListWhenObjectIsBlocked() {
+    algorithmData data = new algorithmData();
+    data.setBlocked(true);
+    data.setBlack_list(false);
+    boolean result = data.isBlack_list();
+    assertEquals(false, result);
+}
+
+/*ROOST_METHOD_HASH=isBlocked_47b7fd7aa5
+ROOST_METHOD_SIG_HASH=isBlocked_75b5602366
+
+*/
+@Test
+@Tag("valid")
+public void verifyDefaultBlockedState() {
+    
+    algorithmData data = new algorithmData();
+    
+    boolean isBlocked = data.isBlocked();
+    
+    assertFalse(isBlocked, "The default blocked state should be false.");
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByLike_f1d922798a
+ROOST_METHOD_SIG_HASH=rithmPointsByLike_817b4e8687
+
+*/
+@Test
+@Tag("valid")
+public void calculateRithmPointsForPositiveLikes() {
+    algorithmData data = new algorithmData();
+    
+    int likes = 5;
+    int expected = 50;
+    int actual = data.rithmPointsByLike(likes);
+    assertEquals(expected, actual);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByLike_f1d922798a
+ROOST_METHOD_SIG_HASH=rithmPointsByLike_817b4e8687
+
+*/
+@Test
+@Tag("boundary")
+public void calculateRithmPointsForZeroLikes() {
+    algorithmData data = new algorithmData();
+    int likes = 0;
+    int expected = 0;
+    int actual = data.rithmPointsByLike(likes);
+    assertEquals(expected, actual);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByLike_f1d922798a
+ROOST_METHOD_SIG_HASH=rithmPointsByLike_817b4e8687
+
+*/
+@Test
+@Tag("invalid")
+public void calculateRithmPointsForNegativeLikes() {
+    algorithmData data = new algorithmData();
+    
+    int likes = -3;
+    int expected = -30;
+    int actual = data.rithmPointsByLike(likes);
+    assertEquals(expected, actual);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByLike_f1d922798a
+ROOST_METHOD_SIG_HASH=rithmPointsByLike_817b4e8687
+
+*/
+@Test
+@Tag("valid")
+public void calculateRithmPointsWithBlacklistedStatus() {
+    algorithmData data = new algorithmData();
+    data.setBlack_list(true);
+    
+    int likes = 7;
+    int expected = 70;
+    int actual = data.rithmPointsByLike(likes);
+    assertEquals(expected, actual);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByLike_f1d922798a
+ROOST_METHOD_SIG_HASH=rithmPointsByLike_817b4e8687
+
+*/
+@Test
+@Tag("valid")
+public void calculateRithmPointsWithBlockedStatus() {
+    algorithmData data = new algorithmData();
+    data.setBlocked(true);
+    
+    int likes = 10;
+    int expected = 100;
+    int actual = data.rithmPointsByLike(likes);
+    assertEquals(expected, actual);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByComents_bf0560ce74
+ROOST_METHOD_SIG_HASH=rithmPointsByComents_16f69f99ca
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsForPositiveComments() {
+    
+    int comments = 10;
+    int expectedPoints = 150;
+    int actualPoints = algorithmDataInstance.rithmPointsByComents(comments);
+    assertEquals(expectedPoints, actualPoints);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByComents_bf0560ce74
+ROOST_METHOD_SIG_HASH=rithmPointsByComents_16f69f99ca
+
+*/
+@Test
+@Tag("boundary")
+public void calculatePointsForZeroComments() {
+    
+    int comments = 0;
+    int expectedPoints = 0;
+    int actualPoints = algorithmDataInstance.rithmPointsByComents(comments);
+    assertEquals(expectedPoints, actualPoints);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByComents_bf0560ce74
+ROOST_METHOD_SIG_HASH=rithmPointsByComents_16f69f99ca
+
+*/
+@Test
+@Tag("invalid")
+public void calculatePointsForNegativeComments() {
+    
+    int comments = -5;
+    int expectedPoints = -75;
+    int actualPoints = algorithmDataInstance.rithmPointsByComents(comments);
+    assertEquals(expectedPoints, actualPoints);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByComents_bf0560ce74
+ROOST_METHOD_SIG_HASH=rithmPointsByComents_16f69f99ca
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsWithBlacklistStatus() {
+    
+    int comments = 8;
+    algorithmDataInstance.setBlack_list(true);
+    int expectedPoints = 120;
+    int actualPoints = algorithmDataInstance.rithmPointsByComents(comments);
+    assertEquals(expectedPoints, actualPoints);
+}
+
+/*ROOST_METHOD_HASH=rithmPointsByComents_bf0560ce74
+ROOST_METHOD_SIG_HASH=rithmPointsByComents_16f69f99ca
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsWithBlockedStatus() {
+    
+    int comments = 6;
+    algorithmDataInstance.setBlocked(true);
+    int expectedPoints = 90;
+    int actualPoints = algorithmDataInstance.rithmPointsByComents(comments);
+    assertEquals(expectedPoints, actualPoints);
+}
+}
