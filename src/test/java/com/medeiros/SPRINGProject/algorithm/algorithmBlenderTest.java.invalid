@@ -1,0 +1,133 @@
+//This single test file is marked invalid as it contains compilation errors.
+package com.medeiros.SPRINGProject.algorithm;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
+import org.mockito.Mockito;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import com.medeiros.SPRINGProject.utils.hashMapFunctions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class algorithmBlenderTest {
+
+  // Merged class fields
+  private algorithmBlender algorithmBlender;
+
+  // Merged test methods
+ 
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@BeforeEach
+public void setUp() {
+    
+    algorithmBlender = new algorithmBlender();
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsForMultipleSongs() {
+    MusicModel song1 = Mockito.mock(MusicModel.class);
+    when(song1.getMusicName()).thenReturn("Song1");
+    when(song1.getNumberOfLikes()).thenReturn(10);
+    when(song1.getNumberOfComents()).thenReturn(5);
+    MusicModel song2 = Mockito.mock(MusicModel.class);
+    when(song2.getMusicName()).thenReturn("Song2");
+    when(song2.getNumberOfLikes()).thenReturn(20);
+    when(song2.getNumberOfComents()).thenReturn(3);
+    when(rithmPointsByLike(10)).thenReturn(100);
+    when(rithmPointsByComents(5)).thenReturn(50);
+    when(rithmPointsByLike(20)).thenReturn(200);
+    when(rithmPointsByComents(3)).thenReturn(30);
+    Map<String, Integer> expectedMap = new HashMap<>();
+    expectedMap.put("Song1", 150);
+    expectedMap.put("Song2", 230);
+    Map<String, Integer> resultMap = algorithmBlender.algorithmCalc(Arrays.asList(song1, song2));
+    assertEquals(expectedMap, resultMap);
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void handleEmptyList() {
+    Map<String, Integer> resultMap = algorithmBlender.algorithmCalc(Collections.emptyList());
+    assertTrue(resultMap.isEmpty());
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("boundary")
+public void singleSongWithZeroLikesAndComments() {
+    MusicModel song = Mockito.mock(MusicModel.class);
+    when(song.getMusicName()).thenReturn("OnlySong");
+    when(song.getNumberOfLikes()).thenReturn(0);
+    when(song.getNumberOfComents()).thenReturn(0);
+    when(rithmPointsByLike(0)).thenReturn(0);
+    when(rithmPointsByComents(0)).thenReturn(0);
+    Map<String, Integer> expectedMap = new HashMap<>();
+    expectedMap.put("OnlySong", 0);
+    Map<String, Integer> resultMap = algorithmBlender.algorithmCalc(Collections.singletonList(song));
+    assertEquals(expectedMap, resultMap);
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("invalid")
+public void handleNegativeLikesAndComments() {
+    MusicModel song = Mockito.mock(MusicModel.class);
+    when(song.getMusicName()).thenReturn("NegativeSong");
+    when(song.getNumberOfLikes()).thenReturn(-5);
+    when(song.getNumberOfComents()).thenReturn(-10);
+    when(rithmPointsByLike(-5)).thenReturn(0);
+    when(rithmPointsByComents(-10)).thenReturn(0);
+    Map<String, Integer> expectedMap = new HashMap<>();
+    expectedMap.put("NegativeSong", 0);
+    Map<String, Integer> resultMap = algorithmBlender.algorithmCalc(Collections.singletonList(song));
+    assertEquals(expectedMap, resultMap);
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void consistentPointCalculationWithConstants() {
+    MusicModel song1 = Mockito.mock(MusicModel.class);
+    when(song1.getMusicName()).thenReturn("Song1");
+    when(song1.getNumberOfLikes()).thenReturn(15);
+    when(song1.getNumberOfComents()).thenReturn(5);
+    MusicModel song2 = Mockito.mock(MusicModel.class);
+    when(song2.getMusicName()).thenReturn("Song2");
+    when(song2.getNumberOfLikes()).thenReturn(15);
+    when(song2.getNumberOfComents()).thenReturn(5);
+    when(rithmPointsByLike(15)).thenReturn(150);
+    when(rithmPointsByComents(5)).thenReturn(50);
+    Map<String, Integer> expectedMap = new HashMap<>();
+    expectedMap.put("Song1", 200);
+    expectedMap.put("Song2", 200);
+    Map<String, Integer> resultMap = algorithmBlender.algorithmCalc(Arrays.asList(song1, song2));
+    assertEquals(expectedMap, resultMap);
+}
+}
