@@ -1,0 +1,143 @@
+//This single test file is marked invalid as it contains compilation errors.
+package com.medeiros.SPRINGProject.algorithm;
+import com.medeiros.SPRINGProject.Models.MusicModel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.*;
+import com.medeiros.SPRINGProject.utils.hashMapFunctions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class algorithmBlenderTest {
+
+  // Merged class fields
+  private algorithmBlender algorithmBlender;
+  private algorithmData mockAlgorithmData;
+
+  // Merged test methods
+ 
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@BeforeEach
+public void setUp() {
+    algorithmBlender = new algorithmBlender();
+    mockAlgorithmData = Mockito.mock(algorithmData.class);
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsForSingleMusicItem() {
+    MusicModel music = mock(MusicModel.class);
+    when(music.getNumberOfLikes()).thenReturn(10);
+    when(music.getNumberOfComents()).thenReturn(5);
+    when(music.getMusicName()).thenReturn("Song A");
+    when(mockAlgorithmData.rithmPointsByLike(10)).thenReturn(100);
+    when(mockAlgorithmData.rithmPointsByComents(5)).thenReturn(75);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Collections.singletonList(music));
+    assertEquals(1, result.size());
+    assertEquals((Integer) 175, result.get("Song A"));
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void calculatePointsForMultipleMusicItems() {
+    MusicModel music1 = mock(MusicModel.class);
+    MusicModel music2 = mock(MusicModel.class);
+    when(music1.getNumberOfLikes()).thenReturn(10);
+    when(music1.getNumberOfComents()).thenReturn(5);
+    when(music1.getMusicName()).thenReturn("Song A");
+    when(music2.getNumberOfLikes()).thenReturn(20);
+    when(music2.getNumberOfComents()).thenReturn(10);
+    when(music2.getMusicName()).thenReturn("Song B");
+    when(mockAlgorithmData.rithmPointsByLike(10)).thenReturn(100);
+    when(mockAlgorithmData.rithmPointsByComents(5)).thenReturn(75);
+    when(mockAlgorithmData.rithmPointsByLike(20)).thenReturn(200);
+    when(mockAlgorithmData.rithmPointsByComents(10)).thenReturn(150);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Arrays.asList(music1, music2));
+    assertEquals(2, result.size());
+    assertEquals((Integer) 175, result.get("Song A"));
+    assertEquals((Integer) 350, result.get("Song B"));
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("boundary")
+public void handleEmptyMusicList() {
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Collections.emptyList());
+    assertTrue(result.isEmpty());
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("invalid")
+public void handleNullMusicList() {
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(null);
+    assertTrue(result.isEmpty());
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("valid")
+public void verifyPointsCalculationLogic() {
+    MusicModel music = mock(MusicModel.class);
+    when(music.getNumberOfLikes()).thenReturn(15);
+    when(music.getNumberOfComents()).thenReturn(10);
+    when(music.getMusicName()).thenReturn("Song C");
+    when(mockAlgorithmData.rithmPointsByLike(15)).thenReturn(150);
+    when(mockAlgorithmData.rithmPointsByComents(10)).thenReturn(150);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Collections.singletonList(music));
+    assertEquals(1, result.size());
+    assertEquals((Integer) 300, result.get("Song C"));
+}
+
+/*ROOST_METHOD_HASH=algorithmCalc_e489e5c1fc
+ROOST_METHOD_SIG_HASH=algorithmCalc_009085eae1
+
+*/
+@Test
+@Tag("integration")
+public void checkForDuplicateMusicNames() {
+    MusicModel music1 = mock(MusicModel.class);
+    MusicModel music2 = mock(MusicModel.class);
+    when(music1.getNumberOfLikes()).thenReturn(10);
+    when(music1.getNumberOfComents()).thenReturn(5);
+    when(music1.getMusicName()).thenReturn("Song D");
+    when(music2.getNumberOfLikes()).thenReturn(20);
+    when(music2.getNumberOfComents()).thenReturn(10);
+    when(music2.getMusicName()).thenReturn("Song D");
+    when(mockAlgorithmData.rithmPointsByLike(10)).thenReturn(100);
+    when(mockAlgorithmData.rithmPointsByComents(5)).thenReturn(75);
+    when(mockAlgorithmData.rithmPointsByLike(20)).thenReturn(200);
+    when(mockAlgorithmData.rithmPointsByComents(10)).thenReturn(150);
+    Map<String, Integer> result = algorithmBlender.algorithmCalc(Arrays.asList(music1, music2));
+    assertEquals(1, result.size());
+    assertEquals((Integer) 350, result.get("Song D"));
+}
+}
